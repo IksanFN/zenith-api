@@ -25,7 +25,7 @@ class ProductCategory extends Model
         'tagline' => 'string',
         'description' => 'string',
     ];
-
+    
     public function parent()
     {
         return $this->belongsTo(ProductCategory::class, 'parent_id');
