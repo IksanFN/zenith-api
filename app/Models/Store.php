@@ -36,4 +36,9 @@ class Store extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ballance()
+    {
+        return $this->hasOne(StoreBallance::class);
+    }
 }
