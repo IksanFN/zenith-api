@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('trx_code')->unique();
-            $table->foreignId('buyer_id')->constrained('buyers')->cascadeOnDelete();
-            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->foreignUuid('buyer_id')->constrained('buyers', 'id')->cascadeOnDelete();
+            $table->foreignUuid('store_id')->constrained('stores', 'id')->cascadeOnDelete();
             $table->text('address');
             $table->string('address_id');
             $table->string('city');

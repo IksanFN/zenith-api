@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('store_ballance_id')->constrained('store_ballances')->cascadeOnDelete();
+            $table->foreignUuid('store_ballance_id')->constrained('store_ballances', 'id')->cascadeOnDelete();
             $table->decimal('amount', 26, 2)->default(0);
             $table->string('bank_account_name')->nullable();
             $table->string('bank_account_number')->nullable();

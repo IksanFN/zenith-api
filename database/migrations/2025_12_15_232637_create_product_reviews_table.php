@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_images', function (Blueprint $table) {
+        Schema::create('product_reviews', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('transaction_id')->constrained('transactions', 'id')->cascadeOnDelete();
             $table->foreignUuid('product_id')->constrained('products', 'id')->cascadeOnDelete();
-            $table->string('image')->nullable();
+            $table->integer('rating')->default(0);
+            $table->text('review')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('product_reviews');
     }
 };

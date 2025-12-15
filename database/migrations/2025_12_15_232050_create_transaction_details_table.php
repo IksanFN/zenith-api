@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('transaction_id')->constrained('transactions')->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignUuid('transaction_id')->constrained('transactions', 'id')->cascadeOnDelete();
+            $table->foreignUuid('product_id')->constrained('products', 'id')->cascadeOnDelete();
             $table->integer('quantity');
             $table->decimal('subtotal', 26, 2)->default(0);
             $table->timestamps();

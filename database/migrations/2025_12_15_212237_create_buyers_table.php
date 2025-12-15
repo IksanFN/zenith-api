@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('buyers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained('users', 'id')->cascadeOnDelete();
             $table->string('profile_picture')->nullable();
             $table->string('phone_number')->nullable();
             $table->timestamps();

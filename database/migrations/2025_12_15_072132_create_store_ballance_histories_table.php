@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('store_ballance_histories', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignId('store_ballance_id')->constrained('store_ballances')->cascadeOnDelete();
+            $table->foreignUuid('store_ballance_id')->constrained('store_ballances', 'id')->cascadeOnDelete();
             $table->enum('type', ['income', 'withdrawal'])->default('income');
             $table->uuid('reference_id')->nullable();
             $table->string('reference_type')->nullable();

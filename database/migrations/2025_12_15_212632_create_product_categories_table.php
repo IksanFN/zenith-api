@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('parent_id')->nullable()->constrained('product_categories')->nullOnDelete();
+            $table->foreignUuid('parent_id')->nullable()->constrained('product_categories')->nullOnDelete();
             $table->string('image')->nullable();
             $table->string('name');
             $table->string('slug')->unique();
