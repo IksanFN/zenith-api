@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('trx_code')->unique();
+            $table->string('trx_code')->unique()->index();
             $table->foreignUuid('buyer_id')->constrained('buyers', 'id')->cascadeOnDelete();
             $table->foreignUuid('store_id')->constrained('stores', 'id')->cascadeOnDelete();
             $table->text('address');
@@ -25,7 +25,9 @@ return new class extends Migration
             $table->string('tracking_number')->nullable();
             $table->decimal('tax', 26, 2)->default(0);
             $table->decimal('grand_total', 26, 2)->default(0);
-            $table->enum('payment_status', ['paid', 'unpaid', 'pending', 'failed'])->default('unpaid')->index();
+            $table->enum('payment_status', ['paid', 'unpaid', 'pending', 'failed'])->default('unpaid');
+            $table->index(['buyer_id', 'created_at']);
+            $table->index(['store_id', 'payment_status']);
             $table->timestamps();
         });
     }

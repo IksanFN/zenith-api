@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->index(['store_id', 'is_active']);
+            $table->index(['product_category_id', 'is_active']);
             $table->timestamps();
         });
     }

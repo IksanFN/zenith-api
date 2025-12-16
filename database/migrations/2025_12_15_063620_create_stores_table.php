@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users', 'id')->cascadeOnDelete();
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->index();
             $table->string('logo')->nullable();
             $table->text('description')->nullable();
             $table->string('phone')->nullable();
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('longitude')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_verified')->default(false);
+            $table->index(['is_active', 'is_verified']);
             $table->timestamps();
         });
     }
