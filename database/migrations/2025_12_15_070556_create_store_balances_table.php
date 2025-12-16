@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('store_ballances', function (Blueprint $table) {
+        Schema::create('store_balances', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('store_id')->constrained('stores', 'id')->cascadeOnDelete();
             $table->decimal('amount', 26, 2)->default(0);
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('store_ballances');
+        Schema::dropIfExists('store_balances');
     }
 };

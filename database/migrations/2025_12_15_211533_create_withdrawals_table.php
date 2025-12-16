@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('store_ballance_id')->constrained('store_ballances', 'id')->cascadeOnDelete();
+            $table->foreignUuid('store_balance_id')->constrained('store_balances', 'id')->cascadeOnDelete();
             $table->decimal('amount', 26, 2)->default(0);
             $table->string('bank_account_name')->nullable();
             $table->string('bank_account_number')->nullable();
             $table->string('bank_name')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending')->index();
             $table->timestamps();
         });
     }

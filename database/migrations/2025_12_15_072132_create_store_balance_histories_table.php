@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('store_ballance_histories', function (Blueprint $table) {
+        Schema::create('store_balance_histories', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->foreignUuid('store_ballance_id')->constrained('store_ballances', 'id')->cascadeOnDelete();
-            $table->enum('type', ['income', 'withdrawal'])->default('income');
+            $table->foreignUuid('store_balance_id')->constrained('store_balances', 'id')->cascadeOnDelete();
+            $table->enum('type', ['income', 'withdrawal'])->default('income')->index();
             $table->uuid('reference_id')->nullable();
-            $table->string('reference_type')->nullable();
-            $table->decimal('amount', 26, 2)->default(0);
+            $table->string('reference_type')->nullable()->index();
+            $table->decimal('amount', 26, 2)->default(0)->index();
             $table->string('remarks')->nullable();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('store_ballance_histories');
+        Schema::dropIfExists('store_balance_histories');
     }
 };

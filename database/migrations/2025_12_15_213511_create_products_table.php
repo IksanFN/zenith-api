@@ -15,16 +15,18 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('store_id')->constrained('stores', 'id')->cascadeOnDelete();
             $table->foreignUuid('product_category_id')->constrained('product_categories', 'id')->cascadeOnDelete();
-            $table->string('name');
+            $table->string('name')->index();
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->enum('condition', ['new', 'secondhand'])->default('new');
-            $table->decimal('price', 26, 2)->default(0);
+            $table->decimal('price', 26, 2)->default(0)->index();
             $table->decimal('weight', 26, 2)->default(0);
             $table->unsignedInteger('stock')->default(0);
             $table->decimal('discount_price', 26, 2)->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->index(['store_id', 'is_active']);
+            $table->index(['product_category_id', 'is_active']);
             $table->timestamps();
         });
     }

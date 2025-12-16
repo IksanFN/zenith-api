@@ -37,9 +37,9 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ballance()
+    public function balance()
     {
-        return $this->hasOne(StoreBallance::class);
+        return $this->hasOne(StoreBalance::class);
     }
 
     public function products()
